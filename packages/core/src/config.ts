@@ -22,15 +22,15 @@ export type OrbitMode = (typeof OrbitModes)[number];
 
 export const DefaultLightEdgeColor = 0x333333;
 export const DefaultDarkEdgeColor = 0xeeeeee;
-/** `DefaultLightEdgeColor` mixed halfway into the light theme's viewport background (#888888). */
-export const DefaultLightDrivenColor = 0x5e5e5e;
-/** `DefaultDarkEdgeColor` mixed halfway into the dark theme's viewport background (#242424). */
-export const DefaultDarkDrivenColor = 0x898989;
+/** `DefaultLightEdgeColor` mixed halfway into the light theme's viewport background (#9ca3af). */
+export const DefaultLightDrivenColor = 0x686b71;
+/** `DefaultDarkEdgeColor` mixed halfway into the dark theme's viewport background (#18181b). */
+export const DefaultDarkDrivenColor = 0x838385;
 /**
  * A sketch entity that is not fully constrained, in the sketch editor — the SolidWorks
  * convention: an under-defined line reads blue until every one of its parameters is
  * pinned, at which point it falls back to `defaultEdgeColor`. One value for both themes,
- * unlike `drivenColor`: this blue stays legible on either backdrop (#888888 and #242424).
+ * unlike `drivenColor`: this blue stays legible on either backdrop (#9ca3af and #18181b).
  */
 export const DefaultSketchFreeColor = 0x1c4eff;
 
@@ -60,7 +60,7 @@ export class VisualItemConfig extends Observable {
     /**
      * The colour a driven (reference) sketch dimension draws in: a reference reads as the sketch's
      * own line colour muted into whatever it is drawn over, and the two themes put that in
-     * different places — their backdrops are #888888 and #242424, which straddle a mid grey, so one
+     * different places — their backdrops are #9ca3af and #18181b, which straddle a mid grey, so one
      * value cannot be quiet on the one and visible on the other (`DefaultLightDrivenColor` and
      * `DefaultDarkDrivenColor` are each their own theme's mix). No other annotation tone needs the
      * split: the conflicts' red, the redundancy's amber and the selection's green all sit outside

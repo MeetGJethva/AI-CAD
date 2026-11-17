@@ -6,7 +6,11 @@ body {
     width: 100%;
     height: 100%;
     font-size: 14px;
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: Inter, system-ui, Avenir, "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
     touch-action: none;
     color: var(--foreground-color);
     background-color: var(--background-color);

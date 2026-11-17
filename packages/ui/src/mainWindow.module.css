@@ -9,6 +9,7 @@ select {
     color: var(--input-text-color);
     background-color: var(--input-background-color);
     border: 1px solid var(--input-border-color);
+    border-radius: var(--radius-input);
 }
 
 button,
@@ -16,6 +17,10 @@ button,
     color: var(--foreground-color);
     background-color: var(--control-background-color);
     border: 1px solid var(--border-color);
+    border-radius: var(--radius-button);
+    transition:
+        background-color var(--transition-base),
+        border-color var(--transition-base);
 }
 
 a {
@@ -37,6 +42,12 @@ div {
     color: var(--foreground-color);
 }
 
+/* The accent ring every focusable control shares. */
+*:focus-visible {
+    outline: 2px solid var(--ring-color);
+    outline-offset: 2px;
+}
+
 chili3d-main-window {
     position: absolute;
     top: 0;
@@ -47,104 +58,131 @@ chili3d-main-window {
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--control-background-colo);
+    background: var(--scrollbar-track-color);
     border-radius: 2em;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--foreground-muted-color);
+    background-color: var(--scrollbar-thumb-color);
     border-radius: 2em;
-    transition: background-color 0.3s;
+    transition: background-color var(--transition-slow);
     cursor: pointer;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(144, 147, 153, 0.3);
+    background-color: var(--scrollbar-thumb-hover-color);
+}
+
+/*
+ * Shape tokens are theme-independent: only colour changes between light and dark.
+ * Radii follow the 4px inputs / 6px buttons / 8px cards / 12px nav scale.
+ */
+:root {
+    --radius-input: 4px;
+    --radius-button: 6px;
+    --radius-card: 8px;
+    --radius-nav: 12px;
+
+    --transition-fast: 150ms ease;
+    --transition-base: 200ms ease;
+    --transition-slow: 300ms ease;
 }
 
 :root[theme="light"] {
-    --checked-color: rgba(25, 25, 25, 0.2);
+    --checked-color: #cffafe;
     --control-background-color: #ffffff;
-    --primary-color: #0e62d7;
-    --secondary-color: #6a9ee6;
-    --foreground-color: #333;
-    --foreground-secondary-color: #666;
-    --foreground-muted-color: #999;
-    --border-color: #dddddd;
-    --border-hover-color: #bbbbbb;
-    --background-color: #eeeeee;
+    --primary-color: #0891b2;
+    --secondary-color: #3b82f6;
+    --foreground-color: #1a1a1a;
+    --foreground-secondary-color: #555555;
+    --foreground-muted-color: #6b7280;
+    --border-color: #e5e7eb;
+    --border-hover-color: #d1d5db;
+    --background-color: #f7f6fb;
     --panel-background-color: #ffffff;
-    --panel-hover-background-color: #f5f5f5;
-    --hover-background-color: rgba(25, 25, 25, 0.15);
-    --active-background-color: rgba(25, 25, 25, 0.25);
-    --titlebar-forground-color: #333;
-    --titlebar-background-color: #eeeeee;
-    --title-background: rgba(25, 25, 25, 0.08);
-    --title-checked: #ffffff;
-    --statusbar-foreground-color: #333;
-    --statusbar-background-color: #eeeeee;
-    --bridge-connected-color: #187a2e;
-    --bridge-retrying-color: #8a5700;
-    --bridge-muted-color: #59636e;
-    --viewport-background-color: #888;
+    --panel-hover-background-color: #ecfeff;
+    --hover-background-color: #ecfeff;
+    --active-background-color: #cffafe;
+    --titlebar-forground-color: #1a1a1a;
+    --titlebar-background-color: #ffffff;
+    --title-background: rgba(8, 145, 178, 0.08);
+    --title-checked: #cffafe;
+    --statusbar-foreground-color: #1a1a1a;
+    --statusbar-background-color: #ffffff;
+    --bridge-connected-color: #10b981;
+    --bridge-retrying-color: #f59e0b;
+    --bridge-muted-color: #6b7280;
+    --viewport-background-color: #9ca3af;
     --input-background-color: #ffffff;
-    --input-border-color: #dddddd;
-    --input-text-color: #333;
-    --button-primary-background: #0e62d7;
-    --button-primary-hover: #0d5bc7;
+    --input-border-color: #e5e7eb;
+    --input-text-color: #1a1a1a;
+    --button-primary-background: #3b82f6;
+    --button-primary-hover: #2563eb;
     --button-secondary-background: #ffffff;
-    --button-secondary-hover: #f5f5f5;
-    --backdrop-color: rgba(0, 0, 0, 0.45);
-    --loading-border-color: rgba(0, 0, 0, 0.2);
-    --panel-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-    --resizer-gradient: linear-gradient(to right, rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.12));
-    --resizer-gradient-hover: linear-gradient(to right, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.18));
-    --error-color: #ff0000;
-    --warning-color: #ffc107;
+    --button-secondary-hover: #ecfeff;
+    --backdrop-color: rgba(24, 24, 27, 0.45);
+    --loading-border-color: rgba(8, 145, 178, 0.2);
+    --panel-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --resizer-gradient: linear-gradient(to right, rgba(8, 145, 178, 0.06), rgba(8, 145, 178, 0.16));
+    --resizer-gradient-hover: linear-gradient(to right, rgba(8, 145, 178, 0.16), rgba(8, 145, 178, 0.28));
+    --ring-color: #14b8a6;
+    --scrollbar-track-color: #f3f4f6;
+    --scrollbar-thumb-color: #d1d5db;
+    --scrollbar-thumb-hover-color: rgba(8, 145, 178, 0.7);
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6;
 }
 
 :root[theme="dark"] {
-    --checked-color: rgba(255, 255, 255, 0.2);
-    --control-background-color: #2a2a2a;
-    --primary-color: #4a9eff;
-    --secondary-color: #6a9ee6;
-    --foreground-color: #ffffff;
-    --foreground-secondary-color: #b0b0b0;
-    --foreground-muted-color: #808080;
-    --border-color: #4e4e4e;
-    --border-hover-color: #505050;
-    --background-color: #181818;
-    --panel-background-color: #1f1f1f;
-    --panel-hover-background-color: #323232;
-    --hover-background-color: rgba(255, 255, 255, 0.2);
-    --active-background-color: rgba(255, 255, 255, 0.15);
-    --titlebar-forground-color: #ffffff;
-    --titlebar-background-color: #1a1a1a;
-    --title-background: rgba(255, 255, 255, 0.08);
-    --title-checked: rgba(255, 255, 255, 0.3);
-    --statusbar-foreground-color: #ffffff;
-    --statusbar-background-color: #1a1a1a;
-    --bridge-connected-color: #3fb950;
-    --bridge-retrying-color: #d29922;
-    --bridge-muted-color: #8b949e;
-    --viewport-background-color: #242424;
-    --input-background-color: #1e1e1e;
-    --input-border-color: #404040;
-    --input-text-color: #ffffff;
-    --button-primary-background: #4a9eff;
-    --button-primary-hover: #3a8eef;
-    --button-secondary-background: #2a2a2a;
-    --button-secondary-hover: #323232;
-    --backdrop-color: rgba(0, 0, 0, 0.45);
-    --loading-border-color: rgba(255, 255, 255, 0.2);
-    --panel-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    --resizer-gradient: linear-gradient(to right, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.12));
-    --resizer-gradient-hover: linear-gradient(to right, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.18));
-    --error-color: #ff6b6b;
-    --warning-color: #ffd93d;
+    --checked-color: rgba(2, 244, 245, 0.2);
+    --control-background-color: #3f3f46;
+    --primary-color: #02f4f5;
+    --secondary-color: #3b82f6;
+    --foreground-color: #f9f9f9;
+    --foreground-secondary-color: #939393;
+    --foreground-muted-color: #a1a1aa;
+    --border-color: #3f3f46;
+    --border-hover-color: #52525b;
+    --background-color: #18181b;
+    --panel-background-color: #27272a;
+    --panel-hover-background-color: #32323a;
+    --hover-background-color: rgba(2, 244, 245, 0.1);
+    --active-background-color: rgba(2, 244, 245, 0.2);
+    --titlebar-forground-color: #f9f9f9;
+    --titlebar-background-color: #18181b;
+    --title-background: rgba(2, 244, 245, 0.08);
+    --title-checked: rgba(2, 244, 245, 0.25);
+    --statusbar-foreground-color: #f9f9f9;
+    --statusbar-background-color: #18181b;
+    --bridge-connected-color: #10b981;
+    --bridge-retrying-color: #f59e0b;
+    --bridge-muted-color: #a1a1aa;
+    --viewport-background-color: #18181b;
+    --input-background-color: #3f3f46;
+    --input-border-color: #52525b;
+    --input-text-color: #f9f9f9;
+    --button-primary-background: #3b82f6;
+    --button-primary-hover: #2563eb;
+    --button-secondary-background: #27272a;
+    --button-secondary-hover: #3f3f46;
+    --backdrop-color: rgba(0, 0, 0, 0.6);
+    --loading-border-color: rgba(2, 244, 245, 0.2);
+    --panel-shadow: 0 10px 15px rgba(0, 0, 0, 0.35);
+    --resizer-gradient: linear-gradient(to right, rgba(2, 244, 245, 0.06), rgba(2, 244, 245, 0.16));
+    --resizer-gradient-hover: linear-gradient(to right, rgba(2, 244, 245, 0.18), rgba(2, 244, 245, 0.3));
+    --ring-color: #14b8a6;
+    --scrollbar-track-color: #27272a;
+    --scrollbar-thumb-color: #52525b;
+    --scrollbar-thumb-hover-color: rgba(2, 244, 245, 0.8);
+    --success-color: #10b981;
+    --error-color: #ef4444;
+    --warning-color: #f59e0b;
+    --info-color: #3b82f6;
 }

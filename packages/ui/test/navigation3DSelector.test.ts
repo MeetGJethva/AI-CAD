@@ -30,7 +30,10 @@ describe("Navigation3DSelector", () => {
 
         const options = selector.querySelectorAll("option");
         expect(options.length).toBe(Navigation3DTypes.length);
-        expect(options[0].textContent).toBe(Navigation3DTypes[0]);
+        // The built-in profile is labelled with the product name, not its stored key.
+        expect(Navigation3DTypes[0]).toBe("Chili3d");
+        expect(options[0].textContent).toBe("Hexylon");
+        expect(options[1].textContent).toBe(Navigation3DTypes[1]);
     });
 
     test("should mark the current navigation3D type as selected", () => {

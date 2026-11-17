@@ -95,7 +95,7 @@ export class RibbonUI extends HTMLElement {
             div(
                 { className: style.appIcon, onclick: () => PubSub.default.pub("displayHome", true) },
                 svg({ className: style.icon, icon: "icon-chili" }),
-                span({ id: "appName", textContent: `Chili3D - v${__APP_VERSION__}` }),
+                span({ id: "appName", textContent: `Hexylon - v${__APP_VERSION__}` }),
             ),
             div(
                 { className: style.ribbonTitlePanel },

@@ -10,7 +10,8 @@ export const Navigation3DSelector = (props: HTMLProps<HTMLElement>) => {
         nav3DTypes.push(
             option({
                 selected: nav3DType === Config.instance.navigation3D,
-                textContent: nav3DType,
+                // The stored value keeps its original key; only the label is branded.
+                textContent: nav3DType === "Chili3d" ? "Hexylon" : nav3DType,
             }),
         ),
     );
